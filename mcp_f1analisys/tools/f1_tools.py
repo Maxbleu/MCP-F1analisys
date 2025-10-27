@@ -1,20 +1,16 @@
-import base64
 from pydantic import Field
-from mcp.server.fastmcp import Image
-from ..utils.http_client import F1AnalysisClient
-from ..utils.path_utils import get_full_path
-from ..model import DriversLapsRange
+from mcp_f1analisys.utils.http_client import F1AnalysisClient
+from mcp_f1analisys.utils.path_utils import get_full_path
+from mcp_f1analisys.models import DriversLapsRange
 
 # Global client instance
 client = F1AnalysisClient()
 
-async def get_image_analysis(params: list) -> str:
+async def get_image_analysis_url(params: list) -> str:
     """Get F1 analysis image from API"""
     full_path = get_full_path(params)
-    image_data = await client.get_image(full_path)
-    image_base64 = base64.b64encode(image_data).decode("utf-8")
-    image_base64_str = f"data:image/png;base64,{image_base64}"
-    return image_base64_str
+    image_url = await client.get_image(full_path)
+    return image_url
 
 def register_f1_tools(mcp):
     """Register all F1 analysis tools with the MCP server"""
@@ -27,7 +23,7 @@ def register_f1_tools(mcp):
         session: str = Field(description="The exact name of the session within the event, such as 'FP1', 'FP2', 'Q', 'R', or 'Sprint'.")
         ) -> str:
         """Get F1 top speed data visualization from the session"""
-        return await get_image_analysis([type_session, "top_speed", year, round, session])
+        return await get_image_analysis_url([type_session, "top_speed", year, round, session])
 
     @mcp.tool(name="braking")
     async def get_braking(
@@ -37,7 +33,7 @@ def register_f1_tools(mcp):
         session: str = Field(description="The exact name of the session within the event, such as 'FP1', 'FP2', 'Q', 'R', or 'Sprint'.")
         ) -> str:
         """Get F1 average braking data visualization from the session"""
-        return await get_image_analysis([type_session, "braking", year, round, session])
+        return await get_image_analysis_url([type_session, "braking", year, round, session])
 
     @mcp.tool(name="throttle")
     async def get_throttle(
@@ -47,7 +43,7 @@ def register_f1_tools(mcp):
         session: str = Field(description="The exact name of the session within the event, such as 'FP1', 'FP2', 'Q', 'R', or 'Sprint'.")
         ) -> str:
         """Get F1 average throttle data visualization from the session"""
-        return await get_image_analysis([type_session, "throttle", year, round, session])
+        return await get_image_analysis_url([type_session, "throttle", year, round, session])
 
     @mcp.tool(name="fastest_laps")
     async def get_fastest_laps(
@@ -57,7 +53,7 @@ def register_f1_tools(mcp):
         session: str = Field(description="The exact name of the session within the event, such as 'FP1', 'FP2', 'Q', 'R', or 'Sprint'.")
         ) -> str:
         """Get F1 fastest laps data visualization from the session"""
-        return await get_image_analysis([type_session, "fastest_laps", year, round, session])
+        return await get_image_analysis_url([type_session, "fastest_laps", year, round, session])
 
     @mcp.tool(name="lap_time_average")
     async def get_lap_time_average(
@@ -67,7 +63,7 @@ def register_f1_tools(mcp):
         session: str = Field(description="The exact name of the session within the event, such as 'FP1', 'FP2', 'Q', 'R', or 'Sprint'.")
         ) -> str:
         """Get F1 lap time average data visualization from the session"""
-        return await get_image_analysis([type_session, "lap_time_average", year, round, session])
+        return await get_image_analysis_url([type_session, "lap_time_average", year, round, session])
 
     @mcp.tool(name="team_performace")
     async def get_team_performace(
@@ -77,7 +73,7 @@ def register_f1_tools(mcp):
         session: str = Field(description="The exact name of the session within the event, such as 'FP1', 'FP2', 'Q', 'R', or 'Sprint'.")
         ) -> str:
         """Get F1 team performance data visualization from the session"""
-        return await get_image_analysis([type_session, "team_performace", year, round, session])
+        return await get_image_analysis_url([type_session, "team_performace", year, round, session])
 
     @mcp.tool(name="race_position_evolution")
     async def get_race_position_evolution(
@@ -87,7 +83,7 @@ def register_f1_tools(mcp):
         session: str = Field(description="The exact name of the session within the event, such as 'FP1', 'FP2', 'Q', 'R', or 'Sprint'. In this case, this image can only take 'R' and 'Q' as session.")
         ) -> str:
         """Get F1 race position evolution data visualization from the session"""
-        return await get_image_analysis([type_session, "race_position_evolution", year, round, session])
+        return await get_image_analysis_url([type_session, "race_position_evolution", year, round, session])
 
     @mcp.tool(name="lap_time_distribution")
     async def get_lap_time_distribution(
@@ -97,7 +93,7 @@ def register_f1_tools(mcp):
         session: str = Field(description="The exact name of the session within the event, such as 'FP1', 'FP2', 'Q', 'R', or 'Sprint'. In this case, this image can only take 'R' and 'Q' as session.")
         ) -> str:
         """Get F1 lap time distribution data visualization from the session"""
-        return await get_image_analysis([type_session, "lap_time_distribution", year, round, session])
+        return await get_image_analysis_url([type_session, "lap_time_distribution", year, round, session])
 
     @mcp.tool(name="fastest_drivers_compound")
     async def get_fastest_drivers_compound(
@@ -107,7 +103,7 @@ def register_f1_tools(mcp):
         session: str = Field(description="The exact name of the session within the event, such as 'FP1', 'FP2', 'Q', 'R', or 'Sprint'.")
         ) -> str:
         """Get F1 fatest drivers compound data visualization from the session"""
-        return await get_image_analysis([type_session, "fastest_drivers_compound", year, round, session])
+        return await get_image_analysis_url([type_session, "fastest_drivers_compound", year, round, session])
 
     @mcp.tool(name="long_runs")
     async def get_long_runs(
@@ -129,7 +125,7 @@ def register_f1_tools(mcp):
         ),
         ) -> str:
         """Get a long run analysis of specific drivers between selected laps of the session"""
-        return await get_image_analysis([type_session, "long_runs", year, round, session, drivers_laps_range])
+        return await get_image_analysis_url([type_session, "long_runs", year, round, session, drivers_laps_range])
 
     @mcp.tool(name="track_dominance")
     async def get_track_dominance(
@@ -151,7 +147,7 @@ def register_f1_tools(mcp):
             )
         ) -> str:
         """Get F1 track dominance data visualization from the session"""
-        return await get_image_analysis([type_session, "track_dominance", year, round, session, drivers_laps_range])
+        return await get_image_analysis_url([type_session, "track_dominance", year, round, session, drivers_laps_range])
 
     @mcp.tool(name="comparative_lap_time")
     async def get_comparative_lap_time(
@@ -173,7 +169,7 @@ def register_f1_tools(mcp):
             )
         ) -> str:
         """Get F1 comparative lap time data visualization from the session"""
-        return await get_image_analysis([type_session, "comparative_lap_time", year, round, session, drivers_laps_range])
+        return await get_image_analysis_url([type_session, "comparative_lap_time", year, round, session, drivers_laps_range])
 
     @mcp.tool(name="optimal_lap_impact")
     async def get_optimal_lap_impact(
@@ -183,4 +179,4 @@ def register_f1_tools(mcp):
         session: str = Field(description="The exact name of the session within the event, such as 'FP1', 'FP2', 'Q', 'R', or 'Sprint'. In this case, this image can only take 'Q', SS and 'SQ' as session.")
     ) -> str:
         """Get F1 optimal lap impact data visualization from the session"""
-        return await get_image_analysis([type_session, "optimal_lap_impact", year, round, session])
+        return await get_image_analysis_url([type_session, "optimal_lap_impact", year, round, session])

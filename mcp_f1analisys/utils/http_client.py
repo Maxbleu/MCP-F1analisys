@@ -3,7 +3,7 @@ import httpx
 class F1AnalysisClient:
     def __init__(self):
         self.client = httpx.AsyncClient(
-            base_url="https://f1analisys-production.up.railway.app/api",
+            base_url="https://f1analisys.aifone.site/api",
             timeout=httpx.Timeout(30.0, connect=10.0),
             limits=httpx.Limits(max_keepalive_connections=5, max_connections=10),
             follow_redirects=True
@@ -13,7 +13,8 @@ class F1AnalysisClient:
         """Get image data from the F1 analysis API"""
         response = await self.client.get(path)
         response.raise_for_status()
-        return response.content
+        data = response.json()
+        return data["url"]
     
     async def close(self):
         """Close the HTTP client"""

@@ -18,4 +18,4 @@ def get_full_path(params: list) -> str:
         if isinstance(param, dict): 
             param = get_drivers_laps_path(param)
         full_path += "/"+param if isinstance(param, str) else "/"+str(param)
-    return full_path
+    return f"{full_path}?get_url=True"
