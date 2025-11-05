@@ -21,7 +21,8 @@ async def get_image(path: str) -> str:
             allow_redirects=allow_redirects
         )
         response.raise_for_status()
-        return response.json()["url"]
+        data = response.json()
+        return data.get("url", "")
     except requests.exceptions.HTTPError as http_err:
         raise
     except requests.exceptions.RequestException as req_err:
