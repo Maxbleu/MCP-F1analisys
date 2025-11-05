@@ -12,7 +12,7 @@ async def get_image(path: str) -> str:
     session.headers.update(headers)
     try:
         url = f"http://{os.getenv("F1ANALISYS_PRIVATE_NETWORK")}/api/analisys{path}"
-        timeout = 10
+        timeout = 50
         allow_redirects = True
         response = requests.get(
             url=url,
