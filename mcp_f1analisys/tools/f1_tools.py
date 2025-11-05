@@ -1,15 +1,12 @@
 from pydantic import Field
-from mcp_f1analisys.utils.http_client import F1AnalysisClient
+from mcp_f1analisys.utils.http_client import get_image
 from mcp_f1analisys.utils.path_utils import get_full_path
 from mcp_f1analisys.models import DriversLapsRange
-
-# Global client instance
-client = F1AnalysisClient()
 
 async def get_image_analysis_url(params: list) -> str:
     """Get F1 analysis image from API"""
     full_path = get_full_path(params)
-    image_url = await client.get_image(full_path)
+    image_url = await get_image(full_path)
     return image_url
 
 def register_f1_tools(mcp):
