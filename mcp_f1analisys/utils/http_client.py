@@ -1,9 +1,9 @@
-import httpx
+import httpx, os
 
 class F1AnalysisClient:
     def __init__(self):
         self.client = httpx.AsyncClient(
-            base_url="http://f1analisys.railway.internal:8080/api/analisys",
+            base_url=f"http://{os.getenv("F1ANALISYS_PRIVATE_NETWORK")}/api/analisys",
             timeout=httpx.Timeout(30.0, connect=10.0),
             limits=httpx.Limits(max_keepalive_connections=5, max_connections=10),
             follow_redirects=True
