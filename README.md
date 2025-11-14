@@ -4,7 +4,7 @@
 
 A Model Context Protocol (MCP) server for interacting with F1Analisys through LLM interfaces like Claude. **You will need to have Claude installed on your system to continue.**
 
-## Getting Started
+## Instalation
 First of all, you need to install `mcp-f1analisys` package from pypi with pip, using the following command:
 ```commandline
 pip install mcp-f1analisys
@@ -39,8 +39,9 @@ Add the F1Analisys MCP server configuration:
 - Throttle usage ![Sesión Oficial](https://img.shields.io/badge/-Official-blue) ![Sesión Oficial](https://img.shields.io/badge/-Pretesting-red)
 - Braking usage ![Sesión Oficial](https://img.shields.io/badge/-Official-blue) ![Sesión Oficial](https://img.shields.io/badge/-Pretesting-red)
 - Long runs ![Sesión Oficial](https://img.shields.io/badge/-Official-blue) ![Sesión Oficial](https://img.shields.io/badge/-Pretesting-red)
+- Optimal lap impact ![Sesión Oficial](https://img.shields.io/badge/-Qualy-orange) ![Sesión Oficial](https://img.shields.io/badge/-SprintQualy-yellow) ![Sesión Oficial](https://img.shields.io/badge/-SprintShootout-pink)
 
-## Instalation
+## Launch
 Active the virtual environment and install the requirements using:
 ```commandline
 .\.venv\Scripts\activate
@@ -64,4 +65,14 @@ mcp dev .\server.py
 ```
 
 ## License
-This project is licensed under the MIT <a href="https://github.com/Maxbleu/mcp-f1analisys/blob/master/LICENSE">LICENSE</a> - see the details.
+
+### Source Code
+The source code of this project is licensed under the [Apache License 2.0](./LICENSE).
+
+### Data
+This project uses Formula 1 data from [**FastF1**](https://github.com/theOehrly/Fast-F1) 
+created by the FastF1 contributors, licensed under the 
+[MIT License](https://opensource.org/licenses/MIT) license.
+
+## Notice
+MCPF1Analisys is unofficial and are not associated in any way with the Formula 1 companies. F1, FORMULA ONE, FORMULA 1, FIA FORMULA ONE WORLD CHAMPIONSHIP, GRAND PRIX and related marks are trade marks of Formula One Licensing B.V.
